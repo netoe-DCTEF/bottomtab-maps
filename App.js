@@ -1,20 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Text, View, Image, ImagePickerIOS } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import styles from './stylesheet';
+import IF from './IF';
+import Mapa from './Mapa';
+import Unipampa from './Unipampa';
+
+function IFScreen() {
+  return <IF></IF>;
+}
+
+
+function UnipampaScreen() {
+  return <Unipampa></Unipampa>;
+}
+
+
+function MapaScreen() {
+  return <Mapa></Mapa>;
+}
+
+
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="IF" component={IFScreen}
+          options={{
+            tabBarIcon: () => (<Image source={require("./assets/favicon.png")}
+              style={styles.icons} />)
+          }} />
+        <Tab.Screen name="Unipampa" component={UnipampaScreen}
+          options={{
+            tabBarIcon: () => (<Image source={require("./assets/favicon.png")}
+              style={styles.icons} />)
+          }} />
+        <Tab.Screen name="Mapa" component={MapaScreen}
+          options={{
+            tabBarIcon: () => (<Image source={require("./assets/favicon.png")}
+              style={styles.icons} />)
+          }} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
